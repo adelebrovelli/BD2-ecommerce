@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS empresa;
+USE empresa;
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+CREATE USER 'gerente'@'localhost' IDENTIFIED BY 'gerente';
+GRANT SELECT, INSERT, UPDATE, DELETE ON empresa.* TO 'gerente'@'localhost';
+GRANT EXECUTE ON PROCEDURE empresa.reajuste_salario TO 'gerente'@'localhost';
+GRANT EXECUTE ON PROCEDURE empresa.sorteio TO 'gerente'@'localhost';
+GRANT EXECUTE ON PROCEDURE empresa.registrar_venda TO 'gerente'@'localhost';
+GRANT EXECUTE ON PROCEDURE empresa.estatisticas TO 'gerente'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE USER 'funcionario'@'localhost' IDENTIFIED BY 'funcionario';
+GRANT SELECT, INSERT ON empresa.* TO 'funcionario'@'localhost';
+GRANT EXECUTE ON PROCEDURE empresa.registrar_venda TO 'funcionario'@'localhost';
+GRANT EXECUTE ON PROCEDURE empresa.estatisticas TO 'funcionario'@'localhost';
+FLUSH PRIVILEGES;
