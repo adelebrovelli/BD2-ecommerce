@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS log_table (
 CREATE TABLE cliente (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
-    sexo ENUM('m', 'f', 'o'),
+    sexo CHAR(1),
+    CONSTRAINT chk_sexo CHECK (sexo IN ('m', 'f', 'o')),
     idade INT,
     nascimento DATE
 );
@@ -23,10 +24,12 @@ CREATE TABLE clienteespecial (
 CREATE TABLE funcionario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100),
-    sexo ENUM('m', 'f', 'o'),
+    sexo CHAR(1),
+    CONSTRAINT chk_funcionario_sexo CHECK (sexo IN ('m', 'f', 'o')),
     idade INT,
     nascimento DATE,
-    cargo ENUM('vendedor', 'gerente', 'CEO'),
+    cargo VARCHAR(10),
+    CONSTRAINT chk_cargo CHECK (cargo IN ('vendedor', 'gerente', 'CEO')),
     salario DECIMAL(10,2)
 );
 
